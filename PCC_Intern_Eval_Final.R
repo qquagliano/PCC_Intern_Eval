@@ -57,11 +57,16 @@ server <- function(input, output){
     
     observeEvent(input$General_Information, {
         showModal(modalDialog(
-            title = "General Information",
+            title = "General Information", div(HTML(
             "This web app was designed by PCC intern Quinton Quagliano in the summer of 2020 to help interns, psychometrists, and supervisors at the PCC calculate and visualise some data
             to quantify experiences. The web app currently displays some summary statistics, a data table of patients taken, and a histogram of patient ages taken. The information
             displayed on this web app should not be used for research without approval from an IRB. This web app is designed with instructions to only use deidentified data. No data inputed into this program is saved.
-            All code for this web app can be found at https://github.com/qquagliano/PCC_Intern_Eval",
+            
+            <ul>
+                <li>All code for this web app can be found at https://github.com/qquagliano/PCC_Intern_Eval/blob/main/PCC_Intern_Eval_Final.R</li>
+                <li>Version history can be found at https://github.com/qquagliano/PCC_Intern_Eval/commits/main/PCC_Intern_Eval_Final.R</li>
+                <li>Contact: Quinton.Quagliano@protonmail.com with questions, concerns, or comments</li>
+            </ul>")),
             easyClose = TRUE
         ))
     })
