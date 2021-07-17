@@ -3,25 +3,29 @@ library(DT)
 library(tidyverse)
 library(readxl)
 library(knitr)
+library(bslib)
 
-ui <- shinyUI(fluidPage(
+ui <- fluidPage(
     titlePanel('PCC Intern Evaluation'),
     actionButton("General_Information", "Information: Please Read" ),
     br(),
     br(),
     sidebarLayout(
-        div(sidebarPanel(
+        sidebarPanel(
             h3("Input"),
             actionButton("Client_Log_Instructions", "Instructions on Uploading Client Log"),
             br(),
             br(),
             div(HTML("<em> Upload the client log excel file (.xlsx format) </em>")),
-            fileInput('client_log', 'Client Log'),
+            fileInput('client_log', 
+                      div(HTML('<b>Client Log</b>'))),
             div(HTML("<em> Input psychometrist/interns' initials in capital letters (e.g. QQ) </em>")),
-            textInput('psychometrist', 'Psychometrist/Interns Inititals'),
+            textInput('psychometrist', 
+                      div(HTML('<b>Psychometrist/Interns Initials</b>'))),
             div(HTML("<em> Input psychometrist/interns' hours worked (e.g. 130) </em>")),
-            numericInput('hours', 'Psychometrist/Interns Hours Worked', NULL)
-        )),
+            numericInput('hours', 
+                         div(HTML('<b>Psychometrist/Interns Hours Worked</b>')), NULL)
+        ),
         mainPanel(
             tabsetPanel(type = "tabs",
             tabPanel("Summary Statistics", br(),
@@ -41,9 +45,9 @@ ui <- shinyUI(fluidPage(
                 plotOutput('Agehist'))
         ))
     )
-))
+)
 
-server <- shinyServer(function(input, output){
+server <- function(input, output){
     
     data <- reactive({
         req(input$client_log)
@@ -55,7 +59,7 @@ server <- shinyServer(function(input, output){
         showModal(modalDialog(
             title = "General Information",
             "This web app was designed by PCC intern Quinton Quagliano in the summer of 2020 to help interns, psychometrists, and supervisors at the PCC calculate and visualise some data
-            to quantify experiences at the PCC. The web app currently displays some summary statistics, a data table of patients taken, and a histogram of patient ages taken. The information
+            to quantify experiences. The web app currently displays some summary statistics, a data table of patients taken, and a histogram of patient ages taken. The information
             displayed on this web app should not be used for research without approval from an IRB. This web app is designed with instructions to only use deidentified data. No data inputed into this program is saved.
             All code for this web app can be found at https://github.com/qquagliano/PCC_Intern_Eval",
             easyClose = TRUE
@@ -95,7 +99,7 @@ server <- shinyServer(function(input, output){
     
     output$Agehist <- renderPlot({ggplot(data(),aes(x = Age)) +
             geom_histogram(
-                fill = "steelblue4", boundary = 0, pad = TRUE, color = "black", binwidth = 10) +
+                fill = "#758F45", boundary = 0, pad = TRUE, color = "black", binwidth = 10) +
             scale_x_continuous(
                 breaks = c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)) +
             scale_y_continuous(
@@ -114,6 +118,6 @@ server <- shinyServer(function(input, output){
     output$hours <-  renderText(input$hours)
     
     output$patientsperhours <- renderText(as.numeric(count(data()) / input$hours))
-})
+}
 
 shinyApp(ui = ui, server = server)
