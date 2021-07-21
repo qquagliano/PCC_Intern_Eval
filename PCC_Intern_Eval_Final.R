@@ -3,7 +3,6 @@ library(DT)
 library(tidyverse)
 library(readxl)
 library(knitr)
-library(bslib)
 
 ui <- fluidPage(
     br(),
@@ -60,15 +59,15 @@ server <- function(input, output){
     observeEvent(input$General_Information, {
         showModal(modalDialog(
             title = "General Information", div(HTML(
-            "This web app was designed by PCC intern Quinton Quagliano in the summer of 2020 to help interns, psychometrists, and supervisors at the PCC calculate and visualise some data
+            'This web app was designed by PCC intern Quinton Quagliano in the summer of 2020 to help interns, psychometrists, and supervisors at the PCC calculate and visualise some data
             to quantify experiences. The web app currently displays some summary statistics, a data table of patients taken, and a histogram of patient ages taken. The information
             displayed on this web app should not be used for research without approval from an IRB. This web app is designed with instructions to only use deidentified data. No data inputed into this program is saved.
             
             <ul>
-                <li>All code for this web app can be found at https://github.com/qquagliano/PCC_Intern_Eval/blob/main/PCC_Intern_Eval_Final.R</li>
-                <li>Version history can be found at https://github.com/qquagliano/PCC_Intern_Eval/commits/main/PCC_Intern_Eval_Final.R</li>
+                <li>All code for this web app can be found at <a href="https://github.com/qquagliano/PCC_Intern_Eval/blob/main/PCC_Intern_Eval_Final.R">Github (Raw Code)</a></li>
+                <li>Version history can also be found at <a href="https://github.com/qquagliano/PCC_Intern_Eval/commits/main/PCC_Intern_Eval_Final.R">Github (Version History)</a></li>
                 <li>Contact: Quinton.Quagliano@protonmail.com with questions, concerns, or comments</li>
-            </ul>")),
+            </ul>')),
             easyClose = TRUE
         ))
     })
@@ -79,7 +78,7 @@ server <- function(input, output){
             div(HTML("<ol>
                         <li><b>PLEASE READ EACH INSTRUCTION FULLY AND CAREFULLY BEFORE DOING ANYTHING, THESE INSTRUCTIONS FULLY EXPLAIN EVERYTHING YOU NEED TO DO</b>
                         </li>
-                        <li>Open a new tab in the browser, and go to pinerest.sharepoint.com/PPG/Clinics/PCC/SitePages/Home.aspx (copy and paste that link into the internet browser)
+                        <li>Open a new tab in the browser, and go to <a href='https://pinerest.sharepoint.com/PPG/Clinics/PCC/SitePages/Home.aspx'>PCC Sharepoint</a>
                         </li>
                         <li>Under 'Documents' on the right side of the screen, navigate through ADD Intership -> Client Logs
                         </li>
