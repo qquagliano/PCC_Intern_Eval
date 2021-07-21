@@ -6,6 +6,8 @@ library(knitr)
 library(bslib)
 
 ui <- fluidPage(
+    br(),
+    img(src='image.png'),
     titlePanel('PCC Intern Evaluation'),
     actionButton("General_Information", "Information: Please Read" ),
     br(),
