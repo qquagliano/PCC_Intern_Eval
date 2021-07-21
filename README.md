@@ -1,4 +1,4 @@
-# PCC_Intern_Eval
+# PCC Intern Evaluation App
 An evaluatory web app (made in R Shiny) to evaluate PR PCC Interns and Psychometrists
 
 - The actual web app is hosted at: https://quintonquagliano.shinyapps.io/PCC_Intern_Eval/
