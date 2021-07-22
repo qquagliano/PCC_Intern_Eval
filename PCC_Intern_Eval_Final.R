@@ -1,62 +1,77 @@
+# load libraries
 library(shiny)
 library(DT)
 library(tidyverse)
 library(readxl)
 library(knitr)
 
+# define ui
 ui <- fluidPage(
     br(),
-    img(src='image.png'),
-    titlePanel('PCC Intern Evaluation'),
-    actionButton("General_Information", "Information: Please Read" ),
+    img(src='image.png'), # add PR logo
+    titlePanel('PCC Intern Evaluation'), # create title
+    actionButton("General_Information", 
+                 "Information: Please Read" ), # create pop-up button
     br(),
     br(),
-    sidebarLayout(
-        sidebarPanel(
-            h3("Input"),
-            actionButton("Client_Log_Instructions", "Instructions on Uploading Client Log"),
+    sidebarLayout( # create sidebar layout
+        sidebarPanel( # define sidebar panel
+            h3("Input"), # create large header
+            actionButton("Client_Log_Instructions", 
+                         "Instructions on Uploading Client Log"), # create pop-up button
             br(),
             br(),
-            div(HTML("<em> Upload the client log excel file (.xlsx format) </em>")),
+            div(HTML("<em> Upload the client log excel file (.xlsx format) </em>")), # text prefacing uploading client log
             fileInput('client_log', 
-                      div(HTML('<b>Client Log</b>'))),
-            div(HTML("<em> Input psychometrist/interns' initials in capital letters (e.g. QQ) </em>")),
+                      div(HTML('<b>Client Log</b>'))), # file input for client log
+            div(HTML("<em> Input psychometrist/interns' initials in capital letters (e.g. QQ) </em>")), # text prefacing entering intern initials
             textInput('psychometrist', 
-                      div(HTML('<b>Psychometrist/Interns Initials</b>'))),
-            div(HTML("<em> Input psychometrist/interns' hours worked (e.g. 130) </em>")),
+                      div(HTML('<b>Psychometrist/Interns Initials</b>'))), # text input for psychometrist initials
+            div(HTML("<em> Input psychometrist/interns' hours worked (e.g. 130) </em>")), # text prefacing entering intern hours
             numericInput('hours', 
-                         div(HTML('<b>Psychometrist/Interns Hours Worked</b>')), NULL)
+                         div(HTML('<b>Psychometrist/Interns Hours Worked</b>')), NULL) # numeric input for psychometrist hours
         ),
-        mainPanel(
-            tabsetPanel(type = "tabs",
-            tabPanel("Summary Statistics", br(),
-                div(HTML("<b>Total Patients Taken</b>")),
-                textOutput('patients'), br(),                
-                div(HTML("<b>Total Hours Worked</b>")),
-                textOutput('hours'), br(),                
-                div(HTML("<b>Patients per Hour Worked</b>")),
-                textOutput('patientsperhours'), br(),
-                div(HTML("<b>Patient Age Mean</b>")),
-                textOutput('Agestatmean'), br(),
-                div(HTML("<b>Patient Age Standard Deviation</b>")),
-                textOutput('Agestatsd')),
-            tabPanel("Patient List", br(),
-                dataTableOutput('Datatable')),
-            tabPanel("Age Plot", br(),
-                plotOutput('Agehist'))
+        mainPanel( # define main panel
+            tabsetPanel(type = "tabs", # create tabbed layout
+            tabPanel("Summary Statistics", # define first tab
+                     br(), 
+                div(HTML("<b>Total Patients Taken</b>")), # create patients taken heading
+                textOutput('patients'), # patients taken output
+                br(),                
+                div(HTML("<b>Total Hours Worked</b>")), # create hours worked heading
+                textOutput('hours'), # hours worked output
+                br(),                
+                div(HTML("<b>Patients per Hour Worked</b>")), # create patients per hour worked heading
+                textOutput('patientsperhours'), # patients per hour output
+                br(),
+                div(HTML("<b>Patient Age Mean</b>")), # create patient age mean heading
+                textOutput('Agestatmean'), # patient age mean output
+                br(),
+                div(HTML("<b>Patient Age Standard Deviation</b>")), # create patient age sd heading
+                textOutput('Agestatsd')), # patient age sd output
+            tabPanel("Patient List", # define second tab
+                     br(), 
+                dataTableOutput('Datatable')), # create datatable output
+            tabPanel("Age Plot", br(), # define third tab
+                plotOutput('Agehist')) # create age histogram output
         ))
     )
 )
-
+# define server logic
 server <- function(input, output){
-    
+
     data <- reactive({
-        req(input$client_log)
-        read_xlsx(input$client_log$datapath, col_names = c("DOS", "Age", "Psychometrist"), col_types = c("date", "numeric", "text")) %>%
-            filter(Psychometrist == input$psychometrist)
+        req(input$client_log) # require file input for client log
+        read_xlsx(input$client_log$datapath, # read excle file
+                  col_names = c("DOS", "Age", "Psychometrist"), # define column names
+                  col_types = c("date", "numeric", "text")) # define column import types
     })
     
-    observeEvent(input$General_Information, {
+    data1 <- reactive({
+                filter(data(), # filter data by psychometrist
+                       Psychometrist == input$psychometrist)})
+    
+    observeEvent(input$General_Information,{ # define modal text for general information
         showModal(modalDialog(
             title = "General Information", div(HTML(
             'This web app was designed by PCC intern Quinton Quagliano in the summer of 2020 to help interns, psychometrists, and supervisors at the PCC calculate and visualise some data
@@ -72,7 +87,7 @@ server <- function(input, output){
         ))
     })
     
-    observeEvent(input$Client_Log_Instructions, {
+    observeEvent(input$Client_Log_Instructions, { # define modal text for client log instructions
         showModal(modalDialog(
             title = "Instructions on Uploading Client Log",
             div(HTML("<ol>
@@ -99,31 +114,34 @@ server <- function(input, output){
         ))
     })
     
-    output$Datatable <- renderDataTable({
-        data()
+    output$Datatable <- renderDataTable({ # render patient data table
+        data1()
     })
     
-    output$Agehist <- renderPlot({ggplot(data(),aes(x = Age)) +
-            geom_histogram(
-                fill = "#758F45", boundary = 0, pad = TRUE, color = "black", binwidth = 10) +
-            scale_x_continuous(
-                breaks = c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)) +
-            scale_y_continuous(
-                breaks = c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
+    output$Agehist <- renderPlot({ggplot(data1(), # render age plot
+                                  aes(x = Age)) +
+                      geom_histogram(
+                         fill = "#758F45", boundary = 0, pad = TRUE, color = "black", binwidth = 10) +
+                      scale_x_continuous(
+                         breaks = c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)) +
+                      scale_y_continuous(
+                         breaks = c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
                            14, 15, 16, 17, 18, 19, 20)) +
-            theme_bw() +
-            labs (title = "Age Distribution", x = "Age", y = "# of Patients")
+                      theme_bw() +
+                      labs (title = "Age Distribution", 
+                            x = "Age", 
+                            y = "# of Patients")
     })
     
-    output$Agestatmean <- renderText(mean(data()$Age))
+    output$Agestatmean <- renderText(mean(data1()$Age)) # render patient age mean
     
-    output$Agestatsd <- renderText(sd(data()$Age))
+    output$Agestatsd <- renderText(sd(data1()$Age)) # render patient age sd
     
-    output$patients <- renderText(as.numeric(count(data())))
+    output$patients <- renderText(as.numeric(count(data1()))) # render number of patients
     
-    output$hours <-  renderText(input$hours)
+    output$hours <-  renderText(input$hours) # render number of hours worked
     
-    output$patientsperhours <- renderText(as.numeric(count(data()) / input$hours))
+    output$patientsperhours <- renderText(as.numeric(count(data1()) / input$hours)) # render patients per hour
 }
 
-shinyApp(ui = ui, server = server)
+shinyApp(ui = ui, server = server) # run web app
