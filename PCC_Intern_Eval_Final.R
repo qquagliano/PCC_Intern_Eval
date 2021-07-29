@@ -11,7 +11,7 @@ ui <- fluidPage(
     img(src='image.png'), # add PR logo
     titlePanel('PCC Intern Evaluation'), # create title
     actionButton("General_Information", 
-                 "Information: Please Read" ), # create pop-up button
+                 "Information: Please Read"), # create pop-up button
     br(),
     br(),
     sidebarLayout( # create sidebar layout
@@ -81,7 +81,7 @@ server <- function(input, output){
             <ul>
                 <li>All code for this web app can be found at <a href="https://github.com/qquagliano/PCC_Intern_Eval/blob/main/PCC_Intern_Eval_Final.R">Github (Raw Code)</a></li>
                 <li>Version history can also be found at <a href="https://github.com/qquagliano/PCC_Intern_Eval/commits/main/PCC_Intern_Eval_Final.R">Github (Version History)</a></li>
-                <li>Contact: Quinton.Quagliano@protonmail.com with questions, concerns, or comments</li>
+                <li>Contact: <a href="mailto:Quinton.Quagliano@protonmail.com">Quinton.Quagliano@protonmail.com</a> with questions, concerns, or comments</li>
             </ul>')),
             easyClose = TRUE
         ))
