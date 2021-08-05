@@ -4,6 +4,7 @@ library(DT)
 library(tidyverse)
 library(readxl)
 library(shinyBS)
+library(bslib)
 
 jsStr <- '$(document).ready(function(){
   $("a[data-value=\'General Information\']").attr({
@@ -37,11 +38,11 @@ ui <-  fluidPage(
     tags$head(tags$script(HTML(jsStr))),
     tags$head(tags$script(HTML(jsStr1))),
     tags$head(tags$script(HTML(jsStr2))),
+    theme = bs_theme(version = 4, bootswatch = "sandstone"),
     navbarPage("PCC Intern Evaluation",
     tabPanel("Main Application",
     sidebarLayout( # create sidebar layout
         sidebarPanel( # define sidebar panel
-            h3("Input"), # create large header
             actionButton("Client_Log_Instructions", 
                          "Instructions on Uploading Client Log"), # create pop-up button
             br(),
@@ -88,7 +89,7 @@ ui <-  fluidPage(
         tabPanel("Contact Information")
     )
 ),
-bsModal("GenInfo", "General Information", "moda", div(HTML(
+bsModal("GenInfo", "", "moda", size = "large", div(HTML(
     '<p> This web app was designed by PCC intern Quinton Quagliano in the summer of 2020 to help interns, psychometrists, and supervisors at the PCC calculate and visualise some data
             to quantify experiences. The web app currently displays some summary statistics, a data table of patients taken, and a histogram of patient ages taken. The information
             displayed on this web app should not be used for research without approval from an IRB. This web app is designed with instructions to only use de-identified data. No data inputed into this program is saved.
@@ -98,23 +99,23 @@ bsModal("GenInfo", "General Information", "moda", div(HTML(
                 <li>Version history can also be found at <a href="https://github.com/qquagliano/PCC_Intern_Eval/commits/main/PCC_Intern_Eval_Final.R">Github (Version History)</a></li>
             </ul></p>'))),
 
-bsModal("FAQ", "Frequently Asked Questions", "moda", div(HTML(
+bsModal("FAQ", "", "moda", size = "large", div(HTML(
 '<p> 
 <b> What is this app? </b> <br>
 See the General Information page. <br> <br>
 <b> Why did you make this? </b> <br>
 Its a fun side project during my internship and a good way for me to learn and practice coding. I also thought that other interns might be interested in information about the patients they took and some statistics about their time at the PCC. <br> <br>
 <b> How did you make this? </b> <br>
-I used a coding language called R and an add-in for R called Shiny. R is a programming language (like Python) mainly desinged for staticians and data scientists. Shiny is an add-in that allows you to create interactive web pages with R code. I also used a very small amount of Javascript and HTML for certain features and text. <br> <br>
+I used a coding language called <a href ="https://www.r-project.org/">R</a> and an add-in for R called <a href="https://shiny.rstudio.com/">Shiny</a>. R is a programming language (like Python) mainly desinged for staticians and data scientists. Shiny is an add-in that allows you to create interactive web pages with R code. I also used a very small amount of Javascript and HTML for certain features and text. <br> <br>
 <b> How long did this take? </b> <br>
 I probably spent around 5 hours typing code and 8 hours troubleshooting over the course a month or so. Im basically learning as I go, so I tend to take a while to fix issues and figure out what to write. <br> <br>
 <b> How did you learn how to do this? </b> <br>
-I taught myself using some free online books. I also used some code and instructions provided by people on StackOverflow for certain features. <br> <br>
+I taught myself using some free online books. I also used some code and instructions provided by people on StackOverflow for certain features. If you want to learn R, go <a href = "https://psyteachr.github.io/books/">here</a>. If you want to learn Shiny go <a href = "https://shiny.rstudio.com/tutorial/">here</a> <br> <br>
 <b> Are you still updating this app? </b> <br>
-Check the apps Github page in the General Information tab and see if there have been any recent changes. I intend to provide a few more aesthetic updates, but currently, there is not much more that can be added. <br>
+Check the <a href="https://github.com/qquagliano/PCC_Intern_Eval/blob/main/PCC_Intern_Eval_Final.R">Github page</a> and see if there have been any recent changes. I intend to provide a few more aesthetic updates, but currently, there is not much more that can be added. <br>
 </p>'))),
 
-bsModal("ContactInformation", "Contact Information", "moda", div(HTML(
+bsModal("ContactInformation", "", "moda", size = "large", div(HTML(
             '<b>Github</b>: <a href="https://github.com/qquagliano">https://github.com/qquagliano</a> <br> <br>
             <b>Email</b>: <a href="mailto:Quinton.Quagliano@protonmail.com">Quinton.Quagliano@protonmail.com</a>
       '))),
@@ -133,7 +134,8 @@ server <- function(input, output){
     
     observeEvent(input$Client_Log_Instructions, { # define modal text for client log instructions
         showModal(modalDialog(
-            title = "Instructions on Uploading Client Log",
+            title = "",
+            size = "l",
             div(HTML("<ol>
                         <li><b>PLEASE READ EACH INSTRUCTION FULLY AND CAREFULLY BEFORE DOING ANYTHING, THESE INSTRUCTIONS FULLY EXPLAIN EVERYTHING YOU NEED TO DO</b>
                         </li>
