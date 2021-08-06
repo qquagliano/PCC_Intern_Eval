@@ -169,7 +169,13 @@ ui <-  fluidPage(
                     <b> How did you learn how to do this? </b> <br>
                     I taught myself using some free online books. I also used some code and instructions provided by people on StackOverflow for certain features. If you want to learn R, go <a href = "https://psyteachr.github.io/books/">here</a>. If you want to learn Shiny go <a href = "https://shiny.rstudio.com/tutorial/">here</a> <br> <br>
                     <b> Are you still updating this app? </b> <br>
-                    Check the <a href="https://github.com/qquagliano/PCC_Intern_Eval/blob/main/PCC_Intern_Eval_Final.R">Github page</a> and see if there have been any recent changes. I intend to provide a few more aesthetic updates, but currently, there is not much more that can be added. <br>
+                    Check the <a href="https://github.com/qquagliano/PCC_Intern_Eval/blob/main/PCC_Intern_Eval_Final.R">Github</a> and see if there have been any recent changes. I intend to provide a few more aesthetic updates, but currently, there is not much more that can be added. <br> <br>
+                    <b> Can I access previous versions of this app? </b> <br>
+                    You can access the code of any of my revisions. However, I only host the most recent version of the code. Check the <a href="https://github.com/qquagliano/PCC_Intern_Eval/commits/main/PCC_Intern_Eval_Final.R">Version History</a> on Github and you can see all my revisions and versions. <br> <br>
+                    <b> Can you add [insert feature/improvement here]? </b> <br>
+                    Maybe - it depends on the request. One major limitation is that this web app can only use information present in the client log (stored in the PCC). For example, Id love to add a pie chart for gender, but we dont record that on the client log, so I have no access to that data. If we start adding additional information to the client log, I can add new features. <br> <br>
+                    <b> Any other questions? </b> <br>
+                    Send me an email or go to my Github page by going to Information -> Contact Information on this app!
                     </p>'))),
 
     bsModal("ContactInformation", 
