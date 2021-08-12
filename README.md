@@ -1,4 +1,4 @@
-# PCC Intern Evaluation App
+# PCC Psychometrist Evaluation App
 
 ## Summary
 An evaluatory web app (made in R Shiny) to evaluate PR PCC Interns and Psychometrists
