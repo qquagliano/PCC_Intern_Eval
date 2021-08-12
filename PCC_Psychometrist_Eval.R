@@ -61,7 +61,7 @@ ui <-  fluidPage(
       bootswatch = "sandstone"),
     
     # define navbar page format
-    navbarPage("PCC Intern Evaluation",
+    navbarPage("PCC Psychometrist Evaluation",
       
       # define Main Application tab on navbar                  
       tabPanel("Main Application",
@@ -89,19 +89,19 @@ ui <-  fluidPage(
               
               # psychometrist initials block
               div(
-                HTML("<em> Input psychometrist/interns' initials in capital 
+                HTML("<em> Input Psychometrists' Initials in capital 
                      letters (e.g. QQ) </em>")), 
               textInput('psychometrist', 
                         div(
-                          HTML('<b>Psychometrist/Interns Initials</b>'))), 
+                          HTML("<b>Psychometrists' Initials</b>"))), 
               
               #psychometrist hours block
               div(
-                HTML("<em> Input psychometrist/interns' hours worked 
+                HTML("<em> Input Psychometrists' Hours Worked 
                      (e.g. 130) </em>")), 
               numericInput('hours', 
                             div(
-                              HTML('<b>Psychometrist/Interns Hours Worked</b>')), 
+                              HTML("<b>Psychometrists' Hours Worked</b>")), 
                             NULL)), 
           
           # define main panel
@@ -183,8 +183,8 @@ ui <-  fluidPage(
             "moda", 
             size = "large", 
             div(
-              HTML('<p> This web app was designed by PCC intern Quinton 
-              Quagliano in the summer of 2020 to help interns, psychometrists, 
+              HTML('<p> This web app was designed by PCC Intern Quinton 
+              Quagliano in the summer of 2020 to help psychometrists, interns, 
               and supervisors at the PCC calculate and visualise some data
                     to quantify experiences. The web app currently displays 
                     some summary statistics, a data table of patients taken, 
@@ -196,12 +196,12 @@ ui <-  fluidPage(
                     <br>
                     <ul>
                         <li>All code for this web app can be found at 
-                        <a href="https://github.com/qquagliano/PCC_Intern_Eval/
-                        blob/main/PCC_Intern_Eval_Final.R">Github (Raw Code)
+                        <a href="https://github.com/qquagliano/PCC_Psychometrist_Eval/
+                        blob/main/PCC_Psychometrist_Eval.R">Github (Raw Code)
                         </a></li>
                         <li>Version history can also be found at 
-                        <a href="https://github.com/qquagliano/PCC_Intern_Eval/
-                        commits/main/PCC_Intern_Eval_Final.R">Github 
+                        <a href="https://github.com/qquagliano/PCC_Psychometrist_Eval/
+                        commits/main/PCC_Psychometrist_Eval">Github 
                         (Version History)</a></li>
                     </ul></p>'))),
 
@@ -217,7 +217,8 @@ ui <-  fluidPage(
                     <b> Why did you make this? </b> <br>
                     Its a fun side project during my internship and a good way 
                     for me to learn and practice coding. I also thought that 
-                    other interns might be interested in information about the 
+                    other psychometrists and interns might be interested in 
+                    information about the 
                     patients they took and some statistics about their time at 
                     the PCC. <br> <br>
                     <b> How did you make this? </b> <br>
@@ -243,7 +244,7 @@ ui <-  fluidPage(
                     "https://shiny.rstudio.com/tutorial/">here</a> <br> <br>
                     <b> Are you still updating this app? </b> <br>
                     Check the <a href="https://github.com/qquagliano/
-                    PCC_Intern_Eval/blob/main/PCC_Intern_Eval_Final.R">Github</a> 
+                    PCC_Psychometrist_Eval/blob/main/PCC_Psychometrist_Eval_Final.R">Github</a> 
                     and see if there have been any recent changes. I intend to 
                     provide a few more aesthetic updates, but currently, there 
                     s not much more that can be added. <br> <br>
@@ -251,16 +252,14 @@ ui <-  fluidPage(
                     You can access the code of any of my revisions. However, I 
                     only host the most recent version of the code. 
                     Check the <a href="https://github.com/qquagliano/
-                    PCC_Intern_Eval/commits/main/PCC_Intern_Eval_Final.R">
+                    PCC_Psychometrist_Eval/commits/main/PCC_Psychometrist_Eval_Final.R">
                     Version History</a> on Github and you can see all my 
                     revisions and versions. <br> <br>
                     <b> Can you add [insert feature/improvement here]? </b> <br>
                     Maybe - it depends on the request. One major limitation is 
                     that this web app can only use information present in the 
-                    client log (stored in the PCC). For example, Id love to add 
-                    a pie chart for gender, but we dont record that on the 
-                    client log, so I have no access to that data. If we start 
-                    dding additional information to the client log, I can add 
+                    client log (stored in the PCC). If we start 
+                    adding additional information to the client log, I can add 
                     new features. <br> <br>
                     <b> Any other questions? </b> <br>
                     Send me an email or go to my Github page by going to 
