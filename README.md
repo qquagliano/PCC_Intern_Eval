@@ -4,8 +4,8 @@
 An evaluatory web app (made in R Shiny) to evaluate PR PCC Interns and Psychometrists
 
 - The actual web app is hosted at: https://quintonquagliano.shinyapps.io/PCC_Psychometrist_Eval/
-- R code for this web app can be found at: https://github.com/qquagliano/PCC_Psychometrist_Eval/blob/main/PCC_Intern_Eval_Final.R
-- Version history for the code can be found at: https://github.com/qquagliano/PCC_Psychometrist_Eval/commits/main/PCC_Intern_Eval_Final.R
+- R code for this web app can be found at: https://github.com/qquagliano/PCC_Psychometrist_Eval/blob/main/PCC_Psychometrist_Eval.R
+- Version history for the code can be found at: https://github.com/qquagliano/PCC_Psychometrist_Eval/commits/main/PCC_Psychometrist.R
 
 ## Example Data
 Don't have the client log on hand but still want to see this app work? I've provided an example excel file in this repository to be used in the program called [Example_data.xlsx](https://github.com/qquagliano/PCC_Intern_Eval/blob/main/Example_data.xlsx?raw=true). Download this fiie and upload it to the program and it will work the same as the actual client log. This example data uses no actual patient data and was generated and formatted in R. To see the full functionality of the app, use something like 150 hours in the psychometrist hours field.
