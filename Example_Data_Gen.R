@@ -8,6 +8,8 @@ Psychometrist <- sample(x = c("AA", "AB", "AC", "AD"), size = 200, replace = TRU
 Age <- rnorm(n = 200, mean = 50, sd = 15) %>%
        trunc()
 
+Gender <- sample(x = c("F", "M"), size = 200, replace = TRUE
+
 DATE <- rep(times = 10, x = c(20210101, 
                   20210102, 
                   20210103, 
@@ -30,6 +32,6 @@ DATE <- rep(times = 10, x = c(20210101,
                   20210120)) %>%
         ymd()
 
-data <- tibble(DATE, Age, Psychometrist)
+data <- tibble(DATE, Age, Gender, Psychometrist)
 
 write_xlsx(x = data, path = "Example_data.xlsx")
