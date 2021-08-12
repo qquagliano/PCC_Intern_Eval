@@ -1,16 +1,28 @@
+# load libraries
 library(tidyr)
 library(lubridate)
 library(readxl)
 library(writexl)
 
-Psychometrist <- sample(x = c("AA", "AB", "AC", "AD"), size = 200, replace = TRUE)
+# generate example psychometrist column
+Psychometrist <- sample(x = c("AA", "AB", "AC", "AD"), 
+                        size = 200, 
+                        replace = TRUE)
 
-Age <- rnorm(n = 200, mean = 50, sd = 15) %>%
+# generate example age column
+Age <- rnorm(n = 200, 
+             mean = 50, 
+             sd = 15) %>%
        trunc()
 
-Gender <- sample(x = c("F", "M"), size = 200, replace = TRUE
+# generate gender example column
+Gender <- sample(x = c("F", "M"), 
+                 size = 200, 
+                 replace = TRUE)
 
-DATE <- rep(times = 10, x = c(20210101, 
+# generate date example column
+DATE <- rep(times = 10, 
+            x = c(20210101, 
                   20210102, 
                   20210103, 
                   20210104, 
@@ -30,8 +42,14 @@ DATE <- rep(times = 10, x = c(20210101,
                   20210118,
                   20210119,
                   20210120)) %>%
-        ymd()
+         ymd()
 
-data <- tibble(DATE, Age, Gender, Psychometrist)
+# form dataframe with above columns
+data <- tibble(DATE, 
+               Age, 
+               Gender, 
+               Psychometrist)
 
-write_xlsx(x = data, path = "Example_data.xlsx")
+# write dataframe to excel file
+write_xlsx(x = data, 
+           path = "Example_data.xlsx")
