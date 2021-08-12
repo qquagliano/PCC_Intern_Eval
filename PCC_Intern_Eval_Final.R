@@ -156,11 +156,14 @@ ui <-  fluidPage(
                   # display data table
                   dataTableOutput('Datatable')), 
                 
-                # define thrid tab
-                tabPanel("Age Plot", br(), 
+                # define third tab
+                tabPanel("Plots", br(), 
                          
-                  # display histogram       
-                  plotOutput('Agehist')))))),
+                  # display age histogram       
+                  plotOutput('Agehist'),
+      
+                  # display gender plot
+                  plotOutput('GenderPlot')))))),
 
     # define second drop-down navbar tab
     navbarMenu("Information",
@@ -285,10 +288,12 @@ server <- function(input,
               req(input$client_log) 
               read_xlsx(input$client_log$datapath, 
                   col_names = c("DOS", 
-                                "Age", 
+                                "Age",
+                                "Gender",
                                 "Psychometrist"), 
                   col_types = c("date", 
                                 "numeric", 
+                                "text",
                                 "text")) %>%
               filter(Psychometrist == input$psychometrist)})
     
@@ -321,7 +326,7 @@ server <- function(input,
                     THE CLIENT LOG - DO NOT MAKE CHANGES TO THE ONLINE CLIENT 
                     LOG</B>
                     </li>
-                    <li>Delete all columns except for DATE, Age, and 
+                    <li>Delete all columns except for DATE, Age, Gender, and 
                     Psychometrist. You can do this by right clicking the column 
                     letter and select 'delete' on the desired columns. Make 
                     sure that you delete the entire column, not just the values 
@@ -342,24 +347,36 @@ server <- function(input,
     
     # render age plot
     output$Agehist <- renderPlot({
-                        ggplot(
-                          data(), 
-                          aes(x = Age)) +
-                        geom_histogram(
-                          fill = "#758F45", 
-                          boundary = 0, 
-                          pad = TRUE, 
-                          color = "black", 
-                          binwidth = 10) +
-                        scale_x_continuous(
-                          breaks = c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)) +
-                        scale_y_continuous(
-                          breaks = c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
-                           14, 15, 16, 17, 18, 19, 20)) +
+                        ggplot(data(), 
+                               aes(x = Age)) +
+                        geom_histogram(fill = "#758F45", 
+                                       boundary = 0, 
+                                       pad = TRUE, 
+                                       color = "black", 
+                                       binwidth = 10) +
+                        scale_x_continuous(breaks = c(0, 10, 20, 30, 40, 50, 60, 
+                                                      70, 80, 90, 100)) +
+                        scale_y_continuous(breaks = c(0, 1, 2, 3, 4, 5, 6, 7, 8, 
+                                                      9, 10, 11, 12, 13, 
+                                                      14, 15, 16, 17, 18, 19, 
+                                                      20)) +
                         theme_bw() +
                         labs (title = "Age Distribution", 
                               x = "Age", 
                               y = "# of Patients")})
+    
+    # render gender plot
+    output$GenderPlot <- renderPlot({
+                          ggplot(data(),
+                                 aes(x = data()$Gender)) +
+                          geom_bar(color = "black", fill = "#758F45") +
+                          scale_fill_brewer(palette = "Greens") +
+                          labs (title = "Gender Distribution", 
+                                x = "Gender", 
+                                y = "# of Patients") +
+                          scale_y_continuous(breaks = c(5, 10, 15, 20, 25, 30,
+                                                        35, 40)) +
+                          theme_bw()})
     
     # render patient age mean
     output$Agestatmean <- renderText(
