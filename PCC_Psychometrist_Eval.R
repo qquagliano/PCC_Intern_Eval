@@ -196,12 +196,10 @@ ui <-  fluidPage(
                     <br>
                     <ul>
                         <li>All code for this web app can be found at 
-                        <a href="https://github.com/qquagliano/PCC_Psychometrist_Eval/
-                        blob/main/PCC_Psychometrist_Eval.R">Github (Raw Code)
+                        <a href="https://github.com/qquagliano/PCC_Psychometrist_Eval/blob/main/PCC_Psychometrist_Eval.R">Github (Raw Code)
                         </a></li>
                         <li>Version history can also be found at 
-                        <a href="https://github.com/qquagliano/PCC_Psychometrist_Eval/
-                        commits/main/PCC_Psychometrist_Eval">Github 
+                        <a href="https://github.com/qquagliano/PCC_Psychometrist_Eval/commits/main">Github 
                         (Version History)</a></li>
                     </ul></p>'))),
 
@@ -243,16 +241,14 @@ ui <-  fluidPage(
                     If you want to learn Shiny go <a href = 
                     "https://shiny.rstudio.com/tutorial/">here</a> <br> <br>
                     <b> Are you still updating this app? </b> <br>
-                    Check the <a href="https://github.com/qquagliano/
-                    PCC_Psychometrist_Eval/blob/main/PCC_Psychometrist_Eval_Final.R">Github</a> 
+                    Check the <a href="https://github.com/qquagliano/PCC_Psychometrist_Eval">Github</a> 
                     and see if there have been any recent changes. I intend to 
                     provide a few more aesthetic updates, but currently, there 
                     s not much more that can be added. <br> <br>
                     <b> Can I access previous versions of this app? </b> <br>
                     You can access the code of any of my revisions. However, I 
                     only host the most recent version of the code. 
-                    Check the <a href="https://github.com/qquagliano/
-                    PCC_Psychometrist_Eval/commits/main/PCC_Psychometrist_Eval_Final.R">
+                    Check the <a href="https://github.com/qquagliano/PCC_Psychometrist_Eval/commits/main">
                     Version History</a> on Github and you can see all my 
                     revisions and versions. <br> <br>
                     <b> Can you add [insert feature/improvement here]? </b> <br>
